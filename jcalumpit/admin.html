@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin Panel — J. Calumpit Dental Clinic</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="portal.css" />
+    <link rel="stylesheet" href="admin.css" />
+  </head>
+  <body class="admin">
+    <div class="app" id="app">
+      <aside class="sidebar" id="sidebar">
+        <a href="index.html" class="sb-logo" title="Back to the landing page"
+          ><img src="media/logo (2).jpg" alt="J. Calumpit Dental Clinic"
+        /></a>
+        <nav class="sb-nav" id="sbNav" aria-label="Admin sections"></nav>
+        <div class="sb-foot">
+          <button class="sb-item" id="logoutBtn" type="button"></button>
+        </div>
+      </aside>
+      <div class="sb-backdrop" id="sbBackdrop"></div>
+
+      <div class="main">
+        <header class="topbar">
+          <button
+            class="icon-btn"
+            id="menuBtn"
+            type="button"
+            aria-label="Show or hide the menu"
+          ></button>
+          <h1 id="pageTitle">Dashboard Overview</h1>
+          <span class="grow"></span>
+          <button
+            class="icon-btn"
+            id="bellBtn"
+            type="button"
+            title="Pending appointment requests"
+          ></button>
+          <div class="userbox">
+            <button class="userbtn" id="userBtn" type="button">
+              <span class="avatar" id="avatar">…</span>
+              <span class="who"
+                ><strong id="whoName"></strong><small id="whoRole"></small
+              ></span>
+            </button>
+            <div class="menu hidden" id="userMenu">
+              <a data-go="settings">Settings</a>
+              <a href="index.html">Landing page</a>
+              <a id="logout2">Log out</a>
+            </div>
+          </div>
+        </header>
+        <main class="content" id="view">
+          <div class="loading">Loading…</div>
+        </main>
+      </div>
+    </div>
+
+    <dialog id="appDlg">
+      <form id="dlgForm" novalidate>
+        <div class="modal-body">
+          <h3 id="dlgTitle"></h3>
+          <p class="modal-sub" id="dlgSub"></p>
+          <div id="dlgBody"></div>
+          <p class="modal-err" id="dlgErr"></p>
+          <div class="modal-actions" id="dlgActions"></div>
+        </div>
+      </form>
+    </dialog>
+    <div class="toast" id="toast" role="status"></div>
+
+    <script src="api.js"></script>
+    <script src="charts.js"></script>
+    <script src="admin-core.js"></script>
+    <script src="admin-dashboard.js"></script>
+    <script src="admin-appointments.js"></script>
+    <script src="admin-patients.js"></script>
+    <script src="admin-records.js"></script>
+    <script src="admin-treatment.js"></script>
+    <script src="admin-billing.js"></script>
+    <script src="admin-reports.js"></script>
+    <script src="admin-users.js"></script>
+    <script src="admin-main.js"></script>
+  </body>
+</html>

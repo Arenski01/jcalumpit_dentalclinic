@@ -1,0 +1,317 @@
+/* Shared styles for the patient dashboard and the staff/admin panel.
+   Same brand as the rest of the site: navy + brick red, Playfair Display + Inter. */
+:root {
+  --maroon: #9b2c22;
+  --maroon-dark: #7d221a;
+  --navy: #16264a;
+  --navy-deep: #0f1b33;
+  --ink: #111827;
+  --muted: #4b5563;
+  --line: #e5e7eb;
+  --field: #f7f8fb;
+  --sky: #eaf1f8;
+  --white: #fff;
+  --serif: "Playfair Display", Georgia, serif;
+  --sans: "Inter", system-ui, sans-serif;
+}
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+}
+body {
+  font-family: var(--sans);
+  color: var(--ink);
+  background: var(--sky);
+  min-height: 100vh;
+}
+a {
+  color: inherit;
+}
+h1,
+h2,
+h3 {
+  margin: 0;
+}
+.serif {
+  font-family: var(--serif);
+  color: var(--navy);
+}
+.muted {
+  color: var(--muted);
+}
+.hidden {
+  display: none !important;
+}
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font: 600 0.92rem var(--sans);
+  white-space: nowrap;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+}
+.btn-primary {
+  background: var(--maroon);
+  color: #fff;
+}
+.btn-primary:hover {
+  background: var(--maroon-dark);
+}
+.btn-ghost {
+  background: #fff;
+  border-color: var(--line);
+  color: var(--navy);
+}
+.btn-ghost:hover {
+  background: var(--field);
+  border-color: #cfd6e2;
+}
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 0.82rem;
+}
+.btn-ok {
+  background: #166534;
+  color: #fff;
+}
+.btn-ok:hover {
+  background: #14532d;
+}
+.btn-danger {
+  background: #fff;
+  border-color: #f0c4c0;
+  color: #b42318;
+}
+.btn-danger:hover {
+  background: #fef3f2;
+}
+.btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+.btn:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--maroon);
+  outline-offset: 2px;
+}
+
+/* ---------- badges ---------- */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.badge-pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+.badge-approved {
+  background: #dcfce7;
+  color: #166534;
+}
+.badge-rescheduled {
+  background: #dbeafe;
+  color: #1e40af;
+}
+.badge-declined {
+  background: #fee2e2;
+  color: #991b1b;
+}
+.badge-cancelled {
+  background: #e5e7eb;
+  color: #374151;
+}
+.badge-completed {
+  background: #e0e7ff;
+  color: #3730a3;
+}
+
+/* ---------- forms ---------- */
+.f-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.f-row label {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+select,
+textarea {
+  width: 100%;
+  font: inherit;
+  font-size: 0.92rem;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--field);
+  color: var(--ink);
+}
+textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--maroon);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(155, 44, 34, 0.15);
+}
+
+/* ---------- cards & tables ---------- */
+.card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px;
+}
+.card h3 {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  color: var(--navy);
+  margin-bottom: 14px;
+}
+.table-wrap {
+  overflow-x: auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+th {
+  text-align: left;
+  font-size: 0.74rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+td {
+  padding: 12px;
+  border-bottom: 1px solid #f0f2f6;
+  vertical-align: top;
+}
+tr:last-child td {
+  border-bottom: 0;
+}
+tbody tr.clickable {
+  cursor: pointer;
+}
+tbody tr.clickable:hover td {
+  background: var(--field);
+}
+td small {
+  display: block;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.empty {
+  text-align: center;
+  color: var(--muted);
+  padding: 36px 12px;
+}
+
+/* ---------- modal & toast ---------- */
+dialog {
+  border: 0;
+  border-radius: 14px;
+  padding: 0;
+  width: min(480px, calc(100vw - 32px));
+  box-shadow: 0 24px 60px rgba(15, 27, 51, 0.35);
+  color: var(--ink);
+}
+dialog.wide {
+  width: min(720px, calc(100vw - 32px));
+}
+dialog::backdrop {
+  background: rgba(15, 27, 51, 0.55);
+}
+.modal-body {
+  padding: 26px;
+}
+.modal-body h3 {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+.modal-sub {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0 0 18px;
+}
+.modal-err {
+  color: #b42318;
+  font-size: 0.85rem;
+  margin: 0 0 12px;
+}
+.modal-err:empty {
+  display: none;
+}
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 18px;
+}
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translate(-50%, 20px);
+  background: var(--navy-deep);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
+  z-index: 50;
+  max-width: calc(100vw - 32px);
+}
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+.toast.error {
+  background: #b42318;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}

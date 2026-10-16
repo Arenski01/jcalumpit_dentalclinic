@@ -1,0 +1,646 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Book an Appointment — Calumpit Dental Clinic</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --maroon: #9b2c22;
+        --maroon-dark: #7d221a;
+        --navy: #16264a;
+        --ink: #111827;
+        --muted: #4b5563;
+        --line: #e5e7eb;
+        --field: #f7f8fb;
+        --white: #fff;
+        --serif: "Playfair Display", Georgia, serif;
+        --sans: "Inter", system-ui, sans-serif;
+        --hero-photo: url("media/register\ hero.jpg");
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+      body {
+        font-family: var(--sans);
+        color: var(--ink);
+        min-height: 100vh;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+      }
+
+      /* Left panel */
+      .hero {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        color: #fff;
+        padding: 56px 70px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background:
+          linear-gradient(
+            180deg,
+            rgba(22, 38, 74, 0.55),
+            rgba(22, 38, 74, 0.92)
+          ),
+          var(--hero-photo) center top/cover no-repeat,
+          var(--navy);
+      }
+      .logo {
+        display: block;
+        width: 104px;
+        height: auto;
+        background: #fff;
+        border-radius: 8px;
+        padding: 4px;
+      }
+      .hero h1 {
+        font: 700 clamp(2rem, 3.6vw, 3.4rem)/1.12 var(--serif);
+        margin: auto 0 20px;
+        max-width: 520px;
+      }
+      .hero p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        max-width: 520px;
+        opacity: 0.95;
+      }
+      .perks {
+        list-style: none;
+        padding: 0;
+        margin: 32px 0 0;
+        display: grid;
+        gap: 18px;
+      }
+      .perks li {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        line-height: 1.35;
+      }
+      .perks .tick {
+        flex: none;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 1.5px solid rgba(255, 255, 255, 0.7);
+        display: grid;
+        place-items: center;
+        font-size: 0.85rem;
+      }
+      .perks strong {
+        display: block;
+        font-size: 1.05rem;
+      }
+
+      /* Right panel */
+      .panel {
+        padding: 56px clamp(24px, 8vw, 110px) 72px;
+        max-width: 960px;
+      }
+      .top {
+        text-align: right;
+        font-size: 0.95rem;
+        color: var(--muted);
+      }
+      .top a {
+        color: var(--maroon);
+        font-weight: 600;
+        text-decoration: none;
+      }
+      h2 {
+        font: 700 2.2rem/1.15 var(--serif);
+        color: var(--navy);
+        margin-top: 36px;
+      }
+      .sub {
+        color: var(--muted);
+        font-size: 1.1rem;
+        margin: 8px 0 34px;
+      }
+      .section {
+        color: var(--maroon);
+        font-weight: 600;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--line);
+        margin: 30px 0 22px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px 16px;
+      }
+      .full {
+        grid-column: 1/-1;
+      }
+      label,
+      .lbl {
+        display: block;
+        font-weight: 600;
+        font-size: 0.95rem;
+        margin-bottom: 8px;
+      }
+      .req {
+        color: var(--maroon);
+      }
+      input,
+      select,
+      textarea {
+        width: 100%;
+        font: inherit;
+        padding: 15px 16px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--field);
+        color: var(--ink);
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s,
+          background 0.2s;
+      }
+      textarea {
+        min-height: 96px;
+        resize: vertical;
+      }
+      input::placeholder,
+      textarea::placeholder {
+        color: #9aa1ad;
+      }
+      input:focus,
+      select:focus,
+      textarea:focus {
+        outline: none;
+        border-color: var(--maroon);
+        background: #fff;
+        box-shadow: 0 0 0 3px rgba(155, 44, 34, 0.15);
+      }
+      .invalid {
+        border-color: #d92d20 !important;
+      }
+      .err {
+        color: #d92d20;
+        font-size: 0.85rem;
+        margin-top: 6px;
+        display: none;
+      }
+      .err.show {
+        display: block;
+      }
+
+      /* Time slots */
+      .slots {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
+        gap: 10px;
+      }
+      .slot {
+        position: relative;
+      }
+      .slot input {
+        position: absolute;
+        opacity: 0;
+        inset: 0;
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
+      }
+      .slot span {
+        display: block;
+        text-align: center;
+        padding: 12px 6px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--field);
+        font-size: 0.95rem;
+        transition: all 0.2s;
+      }
+      .slot input:hover + span {
+        border-color: var(--maroon);
+      }
+      .slot input:checked + span {
+        background: var(--maroon);
+        border-color: var(--maroon);
+        color: #fff;
+      }
+      .slot input:focus-visible + span {
+        box-shadow: 0 0 0 3px rgba(155, 44, 34, 0.3);
+      }
+      .slot input:disabled + span {
+        opacity: 0.4;
+        text-decoration: line-through;
+        cursor: not-allowed;
+      }
+      .hint {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .btn {
+        margin-top: 32px;
+        width: 100%;
+        padding: 16px;
+        border: 0;
+        border-radius: 8px;
+        background: var(--maroon);
+        color: #fff;
+        font: 600 1.05rem var(--sans);
+        cursor: pointer;
+        transition:
+          background 0.2s,
+          transform 0.1s;
+      }
+      .btn:hover {
+        background: var(--maroon-dark);
+      }
+      .btn:active {
+        transform: scale(0.99);
+      }
+      .btn:disabled {
+        opacity: 0.6;
+        cursor: wait;
+      }
+
+      .done {
+        display: none;
+        text-align: center;
+        padding: 60px 0;
+      }
+      .done.show {
+        display: block;
+        animation: in 0.5s ease;
+      }
+      .done .ok {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        background: var(--maroon);
+        color: #fff;
+        display: grid;
+        place-items: center;
+        font-size: 1.8rem;
+        margin: 0 auto 20px;
+      }
+      .done h2 {
+        margin-top: 0;
+      }
+      .done p {
+        color: var(--muted);
+        margin: 12px 0 24px;
+      }
+      .done a {
+        color: var(--maroon);
+        font-weight: 600;
+      }
+      @keyframes in {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      @media (max-width: 900px) {
+        body {
+          grid-template-columns: 1fr;
+        }
+        .hero {
+          position: relative;
+          height: auto;
+          min-height: 0;
+          padding: 32px 24px;
+        }
+        .hero h1 {
+          margin: 36px 0 14px;
+        }
+        .perks {
+          display: none;
+        }
+        .panel {
+          padding: 32px 24px 56px;
+        }
+      }
+      @media (max-width: 520px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          transition: none !important;
+          animation: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <aside class="hero">
+      <img
+        class="logo"
+        src="media/logo (2).jpg"
+        alt="J. Calumpit Dental Clinic"
+      />
+      <div>
+        <h1>Your next visit is one step away.</h1>
+        <p>
+          Choose a service and pick a slot with Dr. Calumpit. We'll email you a
+          confirmation once it's approved.
+        </p>
+        <ul class="perks">
+          <li>
+            <span class="tick">✓</span
+            ><span
+              ><strong>Pick your time</strong>See open slots for the day you
+              choose.</span
+            >
+          </li>
+          <li>
+            <span class="tick">✓</span
+            ><span
+              ><strong>Quick approval</strong>The clinic confirms your request
+              by email.</span
+            >
+          </li>
+          <li>
+            <span class="tick">✓</span
+            ><span
+              ><strong>Easy changes</strong>Reschedule or cancel from your
+              dashboard.</span
+            >
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <main class="panel">
+      <div class="top"><a href="index.html">← Back to landing page</a></div>
+
+      <form id="form" novalidate>
+        <h2>Book an appointment</h2>
+        <p class="sub">Tell us what you need and when you're free.</p>
+
+        <div class="section">Patient</div>
+        <div class="grid">
+          <div class="full">
+            <label for="patient">Full name <span class="req">*</span></label>
+            <input
+              id="patient"
+              name="patient"
+              placeholder="Juan D. Dela Cruz"
+              required
+              autocomplete="name"
+            />
+            <div class="err">Enter the patient's full name.</div>
+          </div>
+          <div>
+            <label for="phone">Phone number <span class="req">*</span></label>
+            <input
+              id="phone"
+              name="phone"
+              type="tel"
+              placeholder="09XX XXX XXXX"
+              required
+              autocomplete="tel"
+            />
+            <div class="err">Use a valid PH number, e.g. 09171234567.</div>
+          </div>
+          <div>
+            <label for="email">Email <span class="req">*</span></label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="example@gmail.com"
+              required
+              autocomplete="email"
+            />
+            <div class="err">Enter a valid email address.</div>
+          </div>
+        </div>
+
+        <div class="section">Appointment details</div>
+        <div class="grid">
+          <div>
+            <label for="service">Service <span class="req">*</span></label>
+            <select id="service" name="service" required>
+              <option value="">Select service</option>
+              <option>Check-up &amp; consultation</option>
+              <option>Oral prophylaxis (cleaning)</option>
+              <option>Tooth extraction</option>
+              <option>Filling (pasta)</option>
+              <option>Braces / orthodontics</option>
+              <option>Whitening</option>
+              <option>Dentures</option>
+            </select>
+            <div class="err">Choose a service.</div>
+          </div>
+          <div>
+            <label for="dentist">Dentist</label>
+            <select id="dentist" name="dentist">
+              <option>Dr. Calumpit</option>
+            </select>
+          </div>
+          <div class="full">
+            <label for="date">Preferred date <span class="req">*</span></label>
+            <input type="date" id="date" name="date" required />
+            <div class="err">Pick a date.</div>
+          </div>
+          <div class="full">
+            <span class="lbl">Available time <span class="req">*</span></span>
+            <div class="slots" id="slots">
+              <span class="hint">Pick a date to see open times.</span>
+            </div>
+            <div class="err" id="slotErr">Choose a time slot.</div>
+          </div>
+          <div class="full">
+            <label for="notes">Notes (optional)</label>
+            <textarea
+              id="notes"
+              name="notes"
+              placeholder="Anything the dentist should know, like tooth pain or allergies."
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="err" id="formErr" role="alert"></div>
+        <button class="btn" id="submit" type="submit">
+          Request appointment
+        </button>
+      </form>
+
+      <section class="done" id="done" aria-live="polite">
+        <div class="ok">✓</div>
+        <h2>Request sent</h2>
+        <p id="summary"></p>
+        <a href="dashboard.html">Go to my appointments</a>
+      </section>
+    </main>
+
+    <script src="api.js"></script>
+    <script>
+      (async function () {
+        const $ = (s) => document.querySelector(s);
+        const form = $("#form"),
+          dateEl = $("#date"),
+          slotsEl = $("#slots"),
+          formErr = $("#formErr"),
+          btn = $("#submit");
+        const HINT = (t) =>
+          `<span class="hint" style="grid-column:1/-1">${esc(t)}</span>`;
+
+        // Booking needs an account: send signed-out visitors to the login page.
+        let user = null;
+        try {
+          user = (await api("session.php")).user;
+        } catch (_) {}
+        if (!user) {
+          location.replace("login.html?next=appointment.html&notice=book");
+          return;
+        }
+        if (user.role !== "patient") {
+          location.replace("admin.html");
+          return;
+        }
+
+        // Pre-fill from the account (still editable, e.g. booking for a family member)
+        $("#patient").value = user.fullName;
+        $("#phone").value = user.phone;
+        $("#email").value = user.email;
+
+        // Earliest date = tomorrow, latest = 90 days ahead
+        const minD = new Date(),
+          maxD = new Date();
+        minD.setDate(minD.getDate() + 1);
+        maxD.setDate(maxD.getDate() + 90);
+        dateEl.min = isoDate(minD);
+        dateEl.max = isoDate(maxD);
+
+        let renderId = 0;
+        async function renderSlots() {
+          const v = dateEl.value,
+            myId = ++renderId;
+          $("#slotErr").classList.remove("show");
+          if (!v) {
+            slotsEl.innerHTML = HINT("Pick a date to see open times.");
+            return;
+          }
+          slotsEl.innerHTML = HINT("Checking availability…");
+          let data;
+          try {
+            data = await api("slots.php?date=" + encodeURIComponent(v));
+          } catch (e) {
+            if (myId === renderId) slotsEl.innerHTML = HINT(e.message);
+            return;
+          }
+          if (myId !== renderId) return; // a newer date was picked meanwhile
+          if (!data.open) {
+            slotsEl.innerHTML = HINT(data.message || "No times available.");
+            return;
+          }
+          slotsEl.innerHTML = data.slots
+            .map(
+              (s) =>
+                `<label class="slot"><input type="radio" name="slot" value="${esc(s.time)}" ${s.taken ? "disabled" : ""}><span>${esc(s.label)}</span></label>`,
+            )
+            .join("");
+          if (data.slots.every((s) => s.taken))
+            slotsEl.insertAdjacentHTML(
+              "beforeend",
+              HINT("Fully booked — please try another date."),
+            );
+        }
+        dateEl.addEventListener("change", () => {
+          check(dateEl);
+          renderSlots();
+        });
+
+        function check(el) {
+          let bad = !el.checkValidity();
+          if (el.id === "phone")
+            bad = !/^(09|\+639)\d{9}$/.test(el.value.replace(/[\s-]/g, ""));
+          el.classList.toggle("invalid", bad);
+          const err = el.parentElement.querySelector(".err");
+          if (err) err.classList.toggle("show", bad);
+          return !bad;
+        }
+        form
+          .querySelectorAll("input[required],select[required]")
+          .forEach((el) => {
+            el.addEventListener("blur", () => check(el));
+            el.addEventListener(
+              "input",
+              () => el.classList.contains("invalid") && check(el),
+            );
+          });
+
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          formErr.classList.remove("show");
+          let ok = true;
+          form
+            .querySelectorAll("input[required],select[required]")
+            .forEach((el) => {
+              if (!check(el)) ok = false;
+            });
+          const slot = form.querySelector('input[name="slot"]:checked');
+          $("#slotErr").classList.toggle("show", !slot);
+          if (!slot) ok = false;
+          if (!ok) {
+            form
+              .querySelector(".invalid,.err.show")
+              ?.scrollIntoView({ behavior: "smooth", block: "center" });
+            return;
+          }
+
+          const data = {
+            patient: $("#patient").value.trim(),
+            phone: $("#phone").value.trim(),
+            email: $("#email").value.trim(),
+            service: $("#service").value,
+            dentist: $("#dentist").value,
+            date: dateEl.value,
+            slot: slot.value,
+            notes: $("#notes").value.trim(),
+          };
+
+          btn.disabled = true;
+          btn.textContent = "Sending…";
+          try {
+            await api("appointments.php", { method: "POST", body: data });
+          } catch (err) {
+            if (err.status === 401) {
+              location.replace("login.html?next=appointment.html&notice=book");
+              return;
+            }
+            formErr.textContent = err.message;
+            formErr.classList.add("show");
+            formErr.scrollIntoView({ behavior: "smooth", block: "center" });
+            if (err.code === "slot_taken") renderSlots();
+            btn.disabled = false;
+            btn.textContent = "Request appointment";
+            return;
+          }
+
+          $("#summary").textContent =
+            `${data.service} with ${data.dentist} on ${fmtDate(data.date, true)} at ${slot.nextElementSibling.textContent}. ` +
+            `The clinic will review your request and approve it or suggest a new time. You can follow its status under "My appointments".`;
+          form.style.display = "none";
+          $(".top").style.display = "none";
+          $("#done").classList.add("show");
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      })();
+    </script>
+  </body>
+</html>

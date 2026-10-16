@@ -1,0 +1,471 @@
+:root {
+  --navy: #1b2a4a;
+  --navy-deep: #0f1b33;
+  --brick: #a63a2e;
+  --brick-dark: #8a2f25;
+  --sky: #eaf1f8;
+  --white: #ffffff;
+  --ink-soft: #5b6b85;
+  --line: #dde5f0;
+  --focus: #2c5fae;
+}
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  background: var(--sky);
+  color: var(--navy);
+  min-height: 100vh;
+  padding-top: 80px; /* fixed navbar */
+}
+a {
+  color: inherit;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 0.85fr 1fr;
+  align-items: start;
+  min-height: calc(100vh - 80px);
+}
+
+/* LEFT — hero panel */
+.hero {
+  position: sticky;
+  top: 80px;
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(15, 27, 51, 0.55) 0%,
+      rgba(15, 27, 51, 0.78) 55%,
+      rgba(15, 27, 51, 0.93) 100%
+    ),
+    url("media/register\ hero.jpg");
+  background-size: cover;
+  background-position: center 15%;
+  color: var(--white);
+  padding: 44px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100vh - 80px);
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.brand img {
+  height: 44px;
+  width: auto;
+  display: block;
+  background: var(--white);
+  border-radius: 10px;
+  padding: 6px 10px;
+}
+.hero-copy {
+  max-width: 480px;
+  margin-top: auto;
+  margin-bottom: 12px;
+}
+.hero-eyebrow {
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.15rem;
+  color: #cfe0f5;
+  margin: 0 0 2px;
+}
+.hero-title {
+  font-family: "Playfair Display", serif;
+  font-weight: 600;
+  font-size: clamp(2.1rem, 3.4vw, 3.1rem);
+  line-height: 1.08;
+  margin: 0 0 18px;
+}
+.hero-sub {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #dce6f4;
+  margin: 0 0 26px;
+  max-width: 420px;
+}
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.feature-list li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: 0.95rem;
+  color: #eaf1f8;
+}
+.check {
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  margin-top: 1px;
+}
+.feature-text b {
+  display: block;
+  font-weight: 600;
+  color: var(--white);
+}
+.feature-text span {
+  color: #c6d6eb;
+}
+
+/* Collapsible "show details" — always expanded on tablet/desktop;
+     collapsed behind a down-arrow toggle on mobile (checkbox hack, no JS). */
+.hero-more-checkbox {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.hero-more-toggle {
+  display: none;
+}
+.hero-more-body {
+  display: block;
+}
+.chevron {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  transition: transform 0.2s ease;
+}
+
+/* RIGHT — form panel */
+.panel {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 48px 32px 64px;
+  background: var(--white);
+}
+.card {
+  width: 100%;
+  max-width: 400px;
+}
+.card-wide {
+  max-width: 460px;
+}
+.top-link {
+  text-align: right;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin: 0 0 18px;
+}
+.top-link a {
+  color: var(--brick);
+  font-weight: 600;
+  text-decoration: none;
+}
+.top-link a:hover {
+  text-decoration: underline;
+}
+.card-head {
+  margin-bottom: 28px;
+}
+.card-head h1 {
+  font-family: "Playfair Display", serif;
+  font-weight: 600;
+  font-size: 1.9rem;
+  margin: 0 0 6px;
+  color: var(--navy);
+}
+.card-head p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.94rem;
+}
+
+.section-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--brick);
+  margin: 0 0 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+.section-label-spaced {
+  margin-top: 8px;
+}
+.req {
+  color: var(--brick);
+}
+.hint {
+  margin: 6px 2px 0;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+.submit-wide {
+  width: 100%;
+  margin-top: 14px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.field label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--navy);
+}
+.field input {
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 11px 13px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  background: #fbfcfe;
+  color: var(--navy);
+  outline: none;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+.field input:focus {
+  border-color: #8c2b1d;
+  box-shadow: 0 0 0 3px rgba(140, 43, 29, 0.12);
+  background-color: var(--white);
+}
+.field input::placeholder {
+  color: #9aa9be;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--brick);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  font-family: inherit;
+  text-decoration: none;
+}
+.link-btn:hover {
+  text-decoration: underline;
+}
+/* Custom Select Dropdown Styling */
+.select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.field select {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 11px 36px 11px 13px; /* Extra right padding for custom arrow */
+  font-size: 0.95rem;
+  font-family: inherit;
+  background-color: #fbfcfe;
+  color: var(--navy);
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+
+.field select:focus {
+  border-color: #8c2b1d;
+  box-shadow: 0 0 0 3px rgba(140, 43, 29, 0.12);
+  background-color: var(--white);
+}
+
+/* Custom Dropdown Arrow Icon */
+.select-wrapper::after {
+  content: "";
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-right: 2px solid var(--ink-soft);
+  border-bottom: 2px solid var(--ink-soft);
+  transform: translateY(-70%) rotate(45deg);
+  pointer-events: none;
+}
+
+.name-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.submit {
+  margin-top: 6px;
+  background: var(--brick);
+  color: var(--white);
+  border: none;
+  border-radius: 9px;
+  padding: 13px 0;
+  font-size: 0.98rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.submit:hover {
+  background: var(--brick-dark);
+}
+.submit:focus-visible,
+.tab:focus-visible,
+.link-btn:focus-visible,
+input:focus-visible {
+  outline: 2px solid #8c2b1d;
+  outline-offset: 2px;
+}
+
+.switch-line {
+  text-align: center;
+  font-size: 0.87rem;
+  color: var(--ink-soft);
+  margin-top: 20px;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #9aa9be;
+  font-size: 0.78rem;
+  margin: 22px 0 2px;
+}
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+/* Responsive tiers*/
+@media (max-width: 1365px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .hero {
+    position: relative;
+    top: auto;
+    height: auto;
+    min-height: 420px;
+    padding: 36px 32px;
+  }
+  .hero-copy {
+    margin-top: 24px;
+  }
+  .panel {
+    padding: 40px 32px 60px;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero {
+    min-height: 260px;
+    padding: 22px 20px;
+  }
+  .brand img {
+    height: 36px;
+    padding: 5px 9px;
+  }
+  .hero-copy {
+    margin-top: 16px;
+  }
+  .hero-eyebrow {
+    font-size: 1rem;
+  }
+  .hero-title {
+    font-size: 1.6rem;
+    line-height: 1.15;
+  }
+
+  .hero-more-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    color: #eaf1f8;
+    font-size: 0.88rem;
+    font-weight: 600;
+    padding: 6px 0 2px;
+    user-select: none;
+  }
+  .hero-more-body {
+    display: none;
+    padding-top: 12px;
+  }
+  .hero-more-checkbox:checked ~ .hero-more-body {
+    display: block;
+  }
+  .hero-more-checkbox:checked ~ .hero-more-toggle .chevron {
+    transform: rotate(180deg);
+  }
+  .hero-more-checkbox:focus-visible ~ .hero-more-toggle {
+    outline: 2px solid var(--white);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  .panel {
+    padding: 28px 18px 48px;
+  }
+  .card-head h1 {
+    font-size: 1.5rem;
+  }
+  .name-grid {
+    grid-template-columns: 1fr;
+  }
+  .top-link {
+    text-align: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
+
+.submit:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}

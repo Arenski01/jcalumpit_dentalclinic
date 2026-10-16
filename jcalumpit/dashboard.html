@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>My Appointments — J. Calumpit Dental Clinic</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="portal.css" />
+    <style>
+      .top {
+        background: var(--navy-deep);
+        color: #fff;
+      }
+      .top-in {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 14px 24px;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+      .top img {
+        height: 40px;
+        background: #fff;
+        border-radius: 8px;
+        padding: 4px 8px;
+        display: block;
+      }
+      .top nav {
+        margin-left: auto;
+        display: flex;
+        gap: 18px;
+        align-items: center;
+        font-size: 0.92rem;
+        font-weight: 500;
+      }
+      .top nav a {
+        text-decoration: none;
+        opacity: 0.9;
+      }
+      .top nav a:hover {
+        opacity: 1;
+        text-decoration: underline;
+      }
+      main {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 36px 24px 72px;
+      }
+      .head {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 16px;
+        flex-wrap: wrap;
+        margin-bottom: 24px;
+      }
+      .head h1 {
+        font: 700 2rem/1.15 var(--serif);
+        color: var(--navy);
+      }
+      .head p {
+        margin: 6px 0 0;
+      }
+      .appt {
+        display: grid;
+        grid-template-columns: 76px 1fr auto;
+        gap: 18px;
+        align-items: start;
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 18px 20px;
+        margin-bottom: 14px;
+      }
+      .date-box {
+        text-align: center;
+        background: var(--sky);
+        border-radius: 10px;
+        padding: 10px 4px;
+        color: var(--navy);
+      }
+      .date-box .m {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--maroon);
+      }
+      .date-box .d {
+        font: 700 1.7rem/1.1 var(--serif);
+      }
+      .date-box .y {
+        font-size: 0.72rem;
+        color: var(--muted);
+      }
+      .appt h3 {
+        font-size: 1.05rem;
+        margin-bottom: 4px;
+      }
+      .appt p {
+        margin: 3px 0;
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+      .note {
+        margin-top: 10px !important;
+        padding: 10px 12px;
+        background: var(--field);
+        border-left: 3px solid var(--maroon);
+        border-radius: 6px;
+        color: var(--ink) !important;
+      }
+      .side {
+        text-align: right;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-end;
+      }
+      .balance {
+        background: var(--navy-deep);
+        color: #fff;
+        border-radius: 16px;
+        padding: 24px 28px;
+        margin-bottom: 26px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px 40px;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .balance .lbl {
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        color: #cfd9ea;
+      }
+      .balance .amt {
+        font: 700 2.7rem/1.1 var(--serif);
+        margin: 4px 0 6px;
+      }
+      .balance .amt.clear {
+        color: #86efac;
+      }
+      .balance .msg {
+        font-size: 0.9rem;
+        color: #cfd9ea;
+        max-width: 420px;
+        margin: 0;
+      }
+      .balance .chips {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .balance .chip {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 10px 18px;
+        min-width: 130px;
+      }
+      .balance .chip span {
+        display: block;
+        font-size: 0.75rem;
+        color: #cfd9ea;
+      }
+      .balance .chip strong {
+        font-size: 1.1rem;
+      }
+      .bill strong {
+        color: var(--maroon);
+      }
+      .bill strong.paid {
+        color: #166534;
+      }
+      .pay-table {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 6px 8px;
+        overflow-x: auto;
+      }
+      .pay-table small {
+        display: block;
+        color: var(--muted);
+      }
+      .section-title {
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin: 28px 0 12px;
+      }
+      @media (max-width: 640px) {
+        .appt {
+          grid-template-columns: 64px 1fr;
+        }
+        .side {
+          grid-column: 1/-1;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          text-align: left;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="top">
+      <div class="top-in">
+        <a href="index.html"
+          ><img src="media/logo (2).jpg" alt="J. Calumpit Dental Clinic"
+        /></a>
+        <nav>
+          <a href="index.html">Home</a>
+          <a href="appointment.html">Book appointment</a>
+          <a href="#" id="logout">Log out</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="head">
+        <div>
+          <h1>My appointments</h1>
+          <p class="muted" id="hello">Loading…</p>
+        </div>
+        <a class="btn btn-primary" href="appointment.html"
+          >+ Book an appointment</a
+        >
+      </div>
+
+      <section class="balance" id="balance" aria-live="polite"></section>
+
+      <div id="list"></div>
+
+      <div id="payments"></div>
+    </main>
+
+    <dialog id="confirm">
+      <div class="modal-body">
+        <h3>Cancel this appointment?</h3>
+        <p class="modal-sub" id="confirmText"></p>
+        <p class="modal-err" id="confirmErr"></p>
+        <div class="modal-actions">
+          <button class="btn btn-ghost" id="confirmNo" type="button">
+            Keep it
+          </button>
+          <button class="btn btn-primary" id="confirmYes" type="button">
+            Yes, cancel
+          </button>
+        </div>
+      </div>
+    </dialog>
+    <div class="toast" id="toast" role="status"></div>
+
+    <script src="api.js"></script>
+    <script>
+      (async function () {
+        const $ = (s) => document.querySelector(s);
+        const toast = (t, err) => {
+          const el = $("#toast");
+          el.textContent = t;
+          el.className = "toast show" + (err ? " error" : "");
+          setTimeout(() => (el.className = "toast"), 3200);
+        };
+
+        let user = null;
+        try {
+          user = (await api("session.php")).user;
+        } catch (_) {}
+        if (!user) return location.replace("login.html?next=dashboard.html");
+        if (user.role !== "patient") return location.replace("admin.html");
+        $("#hello").textContent =
+          `Signed in as ${user.fullName} (${user.username}).`;
+
+        $("#logout").addEventListener("click", async (e) => {
+          e.preventDefault();
+          try {
+            await api("logout.php", { method: "POST" });
+          } catch (_) {}
+          location.href = "index.html";
+        });
+
+        const today = isoDate(new Date());
+        let appts = [];
+
+        function card(a) {
+          const d = new Date(a.date + "T00:00");
+          const month = d.toLocaleDateString("en-PH", { month: "short" });
+          const cancellable =
+            ["pending", "approved", "rescheduled"].includes(a.status) &&
+            a.date >= today;
+          let when = "";
+          if (a.status === "rescheduled" && a.prevDate) {
+            when = `<p>Rescheduled from ${esc(fmtDate(a.prevDate))} at ${esc(a.prevTimeLabel)}.</p>`;
+          }
+          const msg = a.adminNote
+            ? `<p class="note"><strong>Message from the clinic:</strong> ${esc(a.adminNote)}</p>`
+            : "";
+          const hint =
+            a.status === "pending"
+              ? "<p>Waiting for the clinic to confirm.</p>"
+              : "";
+          const bill =
+            a.billable && a.fee > 0
+              ? `<p class="bill">Fee ${esc(peso(a.fee))} · Paid ${esc(peso(a.paid))} · ` +
+                (a.balance > 0
+                  ? `Balance <strong>${esc(peso(a.balance))}</strong>`
+                  : '<strong class="paid">Paid in full ✓</strong>') +
+                "</p>"
+              : "";
+          return `<article class="appt">
+            <div class="date-box"><div class="m">${esc(month)}</div><div class="d">${d.getDate()}</div><div class="y">${d.getFullYear()}</div></div>
+            <div>
+              <h3>${esc(a.service)}</h3>
+              <p>${esc(fmtDate(a.date, true))} · ${esc(a.timeLabel)} · ${esc(a.dentist)}</p>
+              <p>For ${esc(a.patientName)}</p>
+              ${when}${hint}${bill}${msg}
+            </div>
+            <div class="side">
+              ${statusBadge(a.status)}
+              ${cancellable ? `<button class="btn btn-danger btn-sm" data-cancel="${a.id}">Cancel</button>` : ""}
+            </div>
+          </article>`;
+        }
+
+        function render() {
+          const upcoming = appts.filter(
+            (a) =>
+              a.date >= today &&
+              ["pending", "approved", "rescheduled"].includes(a.status),
+          );
+          const history = appts.filter((a) => !upcoming.includes(a));
+          if (!appts.length) {
+            $("#list").innerHTML =
+              '<div class="card empty">You have no appointments yet.<br><br><a class="btn btn-primary" href="appointment.html">Book your first visit</a></div>';
+            return;
+          }
+          $("#list").innerHTML =
+            (upcoming.length
+              ? '<div class="section-title" style="margin-top:0">Upcoming</div>' +
+                upcoming
+                  .slice()
+                  .sort((a, b) =>
+                    (a.date + a.time).localeCompare(b.date + b.time),
+                  )
+                  .map(card)
+                  .join("")
+              : "") +
+            (history.length
+              ? '<div class="section-title">Past &amp; closed</div>' +
+                history.map(card).join("")
+              : "");
+        }
+
+        function renderBalance(s) {
+          const el = $("#balance");
+          const clear = s.billed > 0 && s.due <= 0;
+          const msg =
+            s.billed <= 0
+              ? "No charges yet. Fees appear here once the clinic approves a visit and sets the price."
+              : clear
+                ? "You're all paid up. Thank you!"
+                : "This is what you still need to pay for your approved and completed visits. It updates when the clinic records a payment.";
+          el.innerHTML = `
+            <div>
+              <div class="lbl">Remaining balance</div>
+              <div class="amt ${clear ? "clear" : ""}">${esc(peso(s.due))}</div>
+              <p class="msg">${esc(msg)}</p>
+            </div>
+            <div class="chips">
+              <div class="chip"><span>Total billed</span><strong>${esc(peso(s.billed))}</strong></div>
+              <div class="chip"><span>Total paid</span><strong>${esc(peso(s.paid))}</strong></div>
+            </div>`;
+        }
+
+        function renderPayments(list) {
+          const el = $("#payments");
+          if (!list.length) return (el.innerHTML = "");
+          el.innerHTML =
+            '<div class="section-title">Payment history</div><div class="pay-table"><table><thead><tr><th>Date</th><th>For</th><th>Method</th><th>Amount</th></tr></thead><tbody>' +
+            list
+              .map(
+                (p) => `<tr>
+                  <td>${esc(fmtDateTime(p.paidAt))}</td>
+                  <td>${esc(p.service)}<small>${esc(fmtDate(p.apptDate))}${["cancelled", "declined"].includes(p.apptStatus) ? " · appointment " + esc(p.apptStatus) : ""}</small></td>
+                  <td>${esc(METHOD_LABEL[p.method] || p.method)}${p.reference ? `<small>Ref: ${esc(p.reference)}</small>` : ""}</td>
+                  <td><strong>${esc(peso(p.amount))}</strong></td></tr>`,
+              )
+              .join("") +
+            "</tbody></table></div>";
+        }
+
+        async function load() {
+          const [a, b] = await Promise.allSettled([
+            api("appointments.php"),
+            api("billing.php"),
+          ]);
+          if (a.status === "fulfilled") {
+            appts = a.value.appointments;
+            render();
+          } else {
+            $("#list").innerHTML =
+              `<div class="card empty">${esc(a.reason.message)}</div>`;
+          }
+          if (b.status === "fulfilled") {
+            renderBalance(b.value.summary);
+            renderPayments(b.value.payments);
+          } else {
+            $("#balance").innerHTML =
+              `<p class="msg">Couldn't load your balance: ${esc(b.reason.message)}</p>`;
+          }
+        }
+
+        // Cancel flow
+        let cancelId = null;
+        const dlg = $("#confirm");
+        $("#list").addEventListener("click", (e) => {
+          const b = e.target.closest("[data-cancel]");
+          if (!b) return;
+          cancelId = +b.dataset.cancel;
+          const a = appts.find((x) => x.id === cancelId);
+          $("#confirmText").textContent =
+            `${a.service} on ${fmtDate(a.date, true)} at ${a.timeLabel}.`;
+          $("#confirmErr").textContent = "";
+          dlg.showModal();
+        });
+        $("#confirmNo").addEventListener("click", () => dlg.close());
+        $("#confirmYes").addEventListener("click", async () => {
+          const btn = $("#confirmYes");
+          btn.disabled = true;
+          try {
+            await api("appointment_cancel.php", {
+              method: "POST",
+              body: { id: cancelId },
+            });
+            dlg.close();
+            toast("Appointment cancelled.");
+            await load();
+          } catch (err) {
+            $("#confirmErr").textContent = err.message;
+          }
+          btn.disabled = false;
+        });
+
+        load();
+      })();
+    </script>
+  </body>
+</html>
